@@ -1,5 +1,6 @@
 import express from "express";
 import { api, database } from "./config.js";
+import { routes } from "./src/routes/routes.js";
 import { sequelize } from "./src/database/db.js";
 
 class App {
@@ -13,6 +14,10 @@ class App {
     this.app.listen(port, () => {
       console.log(`Server started on port ${port}`);
     })
+  }
+
+  routes() {
+    this.app.use(routes)
   }
 
   async database() {
@@ -29,5 +34,6 @@ class App {
 const backend = new App();
 const port = api.api.port;
 
+backend.routes();
 await backend.database();
 backend.startServer(port);
