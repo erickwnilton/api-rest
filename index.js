@@ -2,6 +2,7 @@ import express from "express";
 import { api, database } from "./config.js";
 import { routes } from "./src/routes/routes.js";
 import { sequelize } from "./src/database/db.js";
+import { User } from "./src/models/user.js";
 
 class App {
   constructor() {
@@ -24,6 +25,7 @@ class App {
     try {
       await this.connectDatabase.authenticate()
       await this.connectDatabase.sync()
+      await User.sync()
       console.log(`Database ${database.connect.database} is connected`)
     } catch (err) {
       console.error(`Database is not connected, ${err}`)
