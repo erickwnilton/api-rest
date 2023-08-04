@@ -1,10 +1,12 @@
 import express from "express";
-import { api } from "./config.js";
+import { api, database } from "./config.js";
+import { sequelize } from "./src/database/db.js";
 
 class App {
   constructor() {
     this.app = express();
     this.app.use(express.json());
+    this.connectDatabase = sequelize;
   }
 
   startServer(port) {
@@ -12,9 +14,20 @@ class App {
       console.log(`Server started on port ${port}`);
     })
   }
+
+  async database() {
+    try {
+      await this.connectDatabase.authenticate()
+      await this.connectDatabase.sync()
+      console.log(`Database ${database.connect.database} is connected`)
+    } catch (err) {
+      console.error(`Database is not connected, ${err}`)
+    }
+  }
 }
 
 const backend = new App();
 const port = api.api.port;
 
+await backend.database();
 backend.startServer(port);
