@@ -29,3 +29,13 @@ export async function updateUser(req, res) {
 
   User.findByPk(req.params.id).then((result) => { res.status(200).json(result) })
 }
+
+export async function deleteUser(req, res) {
+  await User.destroy({
+    where: {
+      id: req.params.id
+    }
+  });
+
+  User.findAll().then((result) => { res.status(200).json(result) })
+}
