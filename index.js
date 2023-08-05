@@ -37,5 +37,8 @@ const backend = new App();
 const port = api.api.port;
 
 backend.routes();
-await backend.database();
+backend.database();
 backend.startServer(port);
+
+const serverApp = backend.app;
+export { serverApp }
