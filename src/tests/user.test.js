@@ -10,8 +10,14 @@ describe('testing user controllers', () => {
     expect(res.body).toBeInstanceOf(Array);
   })
 
-  it('create new users', () => {
+  it('create new users', async () => {
+    const res = await request(app).post("/users")
+      .send({
+        firstName: "", lastName: "", email: "", phone: ""
+      })
 
+    expect(res.status).toBe(201);
+    expect(res.body).toBeInstanceOf(Object);
   })
 
   it('update existing user', () => {
