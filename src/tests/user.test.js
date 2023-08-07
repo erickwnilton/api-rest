@@ -1,7 +1,13 @@
+import request from "supertest";
+import { app } from "../../app.js";
+
 describe('testing user controllers', () => {
 
-  it('show all users', () => {
+  it('show all users', async () => {
+    const res = await request(app).get("/users");
 
+    expect(res.status).toBe(200);
+    expect(res.body).toBeInstanceOf(Array);
   })
 
   it('create new users', () => {
