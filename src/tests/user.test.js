@@ -20,8 +20,14 @@ describe('testing user controllers', () => {
     expect(res.body).toBeInstanceOf(Object);
   })
 
-  it('update existing user', () => {
+  it('update existing user', async () => {
+    const res = await request(app).put("/users/:id")
+      .send({
+        firstName: "", lastName: "", email: "", phone: ""
+      })
 
+    expect(res.status).toBe(200);
+    expect(res.body).toBeInstanceOf(Object);
   })
 
   it('delete existing user', () => {
