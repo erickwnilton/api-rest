@@ -30,8 +30,11 @@ describe('testing user controllers', () => {
     expect(res.body).toBeInstanceOf(Object);
   })
 
-  it('delete existing user', () => {
+  it('delete existing user', async () => {
+    const res = await request(app).delete("/users/:id")
 
+    expect(res.status).toBe(200);
+    expect(res.body).toBeInstanceOf(Array);
   })
 })
 
