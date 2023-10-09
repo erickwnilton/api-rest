@@ -1,5 +1,5 @@
 import request from "supertest";
-import { app } from "../../app.js";
+import { app } from "../app.js";
 
 describe('testing user controllers', () => {
 
@@ -11,20 +11,31 @@ describe('testing user controllers', () => {
   })
 
   it('create new users', async () => {
+    const user = {
+      firstName: "",
+      lastName: "",
+      email: "",
+      phone: ""
+    }
+
     const res = await request(app).post("/users")
-      .send({
-        firstName: "", lastName: "", email: "", phone: ""
-      })
+      .send(user)
 
     expect(res.status).toBe(201);
     expect(res.body).toBeInstanceOf(Object);
   })
 
   it('update existing user', async () => {
+    const user = {
+      firstName: "",
+      lastName: "",
+      email: "",
+      phone: ""
+    }
+
+
     const res = await request(app).put("/users/:id")
-      .send({
-        firstName: "", lastName: "", email: "", phone: ""
-      })
+      .send(user)
 
     expect(res.status).toBe(200);
     expect(res.body).toBeInstanceOf(Object);
@@ -37,4 +48,3 @@ describe('testing user controllers', () => {
     expect(res.body).toBeInstanceOf(Array);
   })
 })
-
