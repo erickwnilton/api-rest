@@ -40,10 +40,13 @@ npm run test
 ```
 -
 |- src
+|- tests
 |-- controllers
 |-- database
 |-- models
 |-- routes
-|-- tests
 ` index.js
 ```
+## Important
+
+To perform the tests, you must pass the data and IDs to change.
